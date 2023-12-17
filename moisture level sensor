@@ -1,0 +1,37 @@
+const int sensorPin = A0;
+const int redledPin = 2;
+const int yellowledPin = 3;
+const int greenledPin = 6;
+void setup() {
+  Serial.begin(9600);
+  pinMode(sensorPin, INPUT);
+  pinMode(redledPin, OUTPUT);
+  pinMode(yellowledPin, OUTPUT);
+  pinMode(greenledPin, OUTPUT);
+
+}
+
+void loop() {
+  int moistureValue = analogRead(sensorPin);
+  int moistureLevel = map(moistureValue, 0, 1023, 0, 100);
+  Serial.print("Moisture Level : ");
+  Serial.println(moistureLevel);
+  if (moistureLevel < 30){
+    digitalWrite(redledPin,LOW);
+    digitalWrite(yellowledPin, LOW);
+    digitalWrite(greenledPin, HIGH);
+    }
+   else if (moistureLevel >= 30 && moistureLevel < 70){
+    digitalWrite(redledPin,LOW);
+    digitalWrite(yellowledPin, HIGH);
+    digitalWrite(greenledPin, LOW);
+    }
+    else{
+    digitalWrite(redledPin,HIGH);
+    digitalWrite(yellowledPin, LOW);
+    digitalWrite(greenledPin, LOW);
+    }
+
+   // delay(500);
+
+}
